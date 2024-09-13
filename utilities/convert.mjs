@@ -1,5 +1,5 @@
 /**
- * This file contains Utilities for Converting a 
+ * This file contains Utilities for Converting a
  * Jalaali date into the UNIX milliseconds timestamp
  */
 
@@ -47,9 +47,22 @@ const diffInLeapYears = (year) => {
 /**
  * Calculates the day of Nowruz in UNIX milliseconds
  * @param {int} year
- * @returns {int}
+ * @returns {[int, null | Error]}
  */
 export const getNowruz = (year) => {
+  // Validating the type of year
+  if (typeof year !== "number") {
+    return [false, new Error("The year variable must be a number")];
+  }
+
+  // Validating the value of year
+  if (
+    year < cycleBreakers[0] ||
+    year >= cycleBreakers[cycleBreakers.length - 1]
+  ) {
+    return [false, new Error("The provided year falls out of supported years")];
+  }
+
   const leapYears = diffInLeapYears(year);
   const nowruz = 6 + leapYears;
 
@@ -61,7 +74,7 @@ export const getNowruz = (year) => {
     year + jalaaliEpochInCommonEra + "-03-" + nowruz
   ).valueOf();
 
-  return nowruzTimestamp;
+  return [nowruzTimestamp, null];
 };
 
 /**
@@ -69,7 +82,7 @@ export const getNowruz = (year) => {
  * @param {number} year
  * @param {number} month
  * @param {number} day
- * @returns {[int, null | error]}
+ * @returns {[int, null | Error]}
  */
 export const convertDate = (year, month, day) => {
   // Validating the input types
@@ -80,11 +93,11 @@ export const convertDate = (year, month, day) => {
   )
     return [0, new Error("The provided values must be numbers")];
 
-  // Validating the year
+  // Validating the value of year
   if (year < cycleBreakers[0] || year > cycleBreakers[cycleBreakers.length - 1])
     return [0, new Error("The provided year is out of the valid range")];
 
-  // Validating the month
+  // Validating the value of month
   if (month < 1 || month > 12)
     return [0, new Error("The provided month is out of the valid range")];
 
@@ -92,13 +105,16 @@ export const convertDate = (year, month, day) => {
   const leap = isLeap(year);
   const months = leap ? jalaaliMonths.leap : jalaaliMonths.common;
 
-  // Validating the provided day
+  // Validating the value of day
   if (day < 1 || day > months[month]) {
     return [0, new Error("Provided day is out of the valid range")];
   }
 
   // Getting the timestamp of Nowruz day
-  let nowruzTimestamp = getNowruz(year);
+  let [nowruzTimestamp, err] = getNowruz(year);
+  if (err !== null) {
+    return [0, err];
+  }
 
   /** Total days since Nowruz */
   let daysSinceNowruz = 0;
