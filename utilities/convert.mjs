@@ -14,6 +14,9 @@ import {
   jalaaliEpochInCommonEra,
 } from "./gregorian.mjs";
 
+// Error Responses
+import { errors } from "./errors.mjs";
+
 /** ---------------- **/
 /** -- Vairables  -- **/
 /** ---------------- **/
@@ -52,7 +55,7 @@ const diffInLeapYears = (year) => {
 export const getNowruz = (year) => {
   // Validating the type of year
   if (typeof year !== "number") {
-    return [false, new Error("The year variable must be a number")];
+    return [false, new Error(errors.expectedToBeNumber)];
   }
 
   // Validating the value of year
@@ -60,7 +63,7 @@ export const getNowruz = (year) => {
     year < cycleBreakers[0] ||
     year >= cycleBreakers[cycleBreakers.length - 1]
   ) {
-    return [false, new Error("The provided year falls out of supported years")];
+    return [false, new Error(errors.outOfRangeYear)];
   }
 
   const leapYears = diffInLeapYears(year);
@@ -91,29 +94,32 @@ export const convertDate = (year, month, day) => {
     typeof month !== "number" ||
     typeof day !== "number"
   )
-    return [0, new Error("The provided values must be numbers")];
+    return [0, new Error(errors.expectedToBeNumber)];
 
   // Validating the value of year
   if (year < cycleBreakers[0] || year > cycleBreakers[cycleBreakers.length - 1])
-    return [0, new Error("The provided year is out of the valid range")];
+    return [0, new Error(errors.outOfRangeYear)];
 
   // Validating the value of month
-  if (month < 1 || month > 12)
-    return [0, new Error("The provided month is out of the valid range")];
+  if (month < 1 || month > 12) return [0, new Error(errors.outOfRangeMonth)];
 
   // Checking if the current year is a leap year
-  const leap = isLeap(year);
+  const [leap, leapErr] = isLeap(year);
+  if (leapErr !== null) {
+    return [0, leapErr];
+  }
+
   const months = leap ? jalaaliMonths.leap : jalaaliMonths.common;
 
   // Validating the value of day
   if (day < 1 || day > months[month]) {
-    return [0, new Error("Provided day is out of the valid range")];
+    return [0, new Error(errors.outOfRangeDay)];
   }
 
   // Getting the timestamp of Nowruz day
-  let [nowruzTimestamp, err] = getNowruz(year);
-  if (err !== null) {
-    return [0, err];
+  let [nowruzTimestamp, nowruzErr] = getNowruz(year);
+  if (nowruzErr !== null) {
+    return [0, nowruzErr];
   }
 
   /** Total days since Nowruz */

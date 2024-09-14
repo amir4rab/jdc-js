@@ -3,6 +3,9 @@
  * with the Jalaali calendar.
  */
 
+// Error Responses
+import { errors } from "./errors.mjs";
+
 /** ---------------- **/
 /** -- Vairables  -- **/
 /** ---------------- **/
@@ -35,18 +38,19 @@ export const jalaaliMonths = {
 /**
  * Checks if the provided Jalaali year is a leap year
  * @param {number} year
- * @returns {boolean}
+ * @returns {[int, null | Error]}
  */
 export const isLeap = (year) => {
   // Validating the type of user input
-  if (typeof year !== "number") return false;
+  if (typeof year !== "number")
+    return [false, new Error(errors.expectedToBeNumber)];
 
   // Validating the range of user input
   if (
     year <= cycleBreakers[0] ||
     year >= cycleBreakers[cycleBreakers.length - 1]
   )
-    return false;
+    return [false, new Error(errors.outOfRangeYear)];
 
   let previousBreak = -1;
 
@@ -65,7 +69,7 @@ export const isLeap = (year) => {
   // Checking if the year is a leap year
   const isLeap = (reminder - 1) % 4 == 0;
 
-  return isLeap;
+  return [isLeap, null];
 };
 
 /**
