@@ -16,4 +16,7 @@ pnpm-debug.log*
 
 # tests
 tests/
-/main.spec.*
+main.spec.mjs
+
+# tsconfig
+tsconfig.json
