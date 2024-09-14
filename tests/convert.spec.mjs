@@ -10,10 +10,11 @@ import { expect, test } from "./test.spec.mjs";
  *  - Performance metrics
  */
 const convertTests = () => {
+  console.log(`Executing "convert" tests...\n`);
   let passed = 0;
 
   test(
-    "Testing the input validation",
+    "Input validation",
     () => {
       let [_, err] = [0, null];
 
@@ -62,7 +63,7 @@ const convertTests = () => {
   );
 
   test(
-    "Testing the converting algorithm",
+    "Converting algorithm",
     () => {
       let [timestamp, err] = [0, null];
       let date = new Date();
@@ -117,7 +118,7 @@ const convertTests = () => {
   );
 
   test(
-    "Testing the performance of the conversion algorithm",
+    "Performance Metrics",
     () => {
       const jalaaliDates = [];
       const results = [];
@@ -175,7 +176,11 @@ Performance Metrics:
     }
   );
 
-  console.log(`[convert tests]: passed ${passed}/3`);
+  if (passed !== 3) {
+    console.error("[convert tests]: Didn't pass all the tests\n\n");
+  } else {
+    console.log(`[convert tests]: passed ${passed}/3\n\n`);
+  }
 };
 
 export default convertTests;

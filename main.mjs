@@ -1,3 +1,5 @@
+"use strict";
+
 import { getNowruz, convertDate } from "./utilities/convert.mjs";
 import { isLeap } from "./utilities/jalaali.mjs";
 
