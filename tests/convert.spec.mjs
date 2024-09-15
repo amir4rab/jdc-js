@@ -42,19 +42,19 @@ const convertTests = () => {
       //** ------------------------- **//
       //** -- Invalid month value -- **//
       //** ------------------------- **//
-      [_, err] = JDC.convert(1403, 14, 1);
+      [_, err] = JDC.convert(1403, 12, 1);
       expect(err).toBeError();
 
-      [_, err] = JDC.convert(1403, 0, 1);
+      [_, err] = JDC.convert(1403, -1, 1);
       expect(err).toBeError();
 
       //** ------------------------- **//
       //** -- Invalid day value   -- **//
       //** ------------------------- **//
-      [_, err] = JDC.convert(1403, 1, 32);
+      [_, err] = JDC.convert(1403, 1, 31);
       expect(err).toBeError();
 
-      [_, err] = JDC.convert(1403, 1, 0);
+      [_, err] = JDC.convert(1403, 1, -1);
       expect(err).toBeError();
     },
     (successful) => {
@@ -71,7 +71,7 @@ const convertTests = () => {
       //** ------------------------------- **//
       //** -- Javascript Release Date   -- **//
       //** ------------------------------- **//
-      [timestamp, err] = JDC.convert(1374, 9, 13);
+      [timestamp, err] = JDC.convert(1374, 8, 12);
       date = new Date(timestamp);
 
       expect(err).toBeNull();
@@ -82,7 +82,7 @@ const convertTests = () => {
       //** ------------------------------- **//
       //** -- Chrome v8 Release Date    -- **//
       //** ------------------------------- **//
-      [timestamp, err] = JDC.convert(1387, 6, 12);
+      [timestamp, err] = JDC.convert(1387, 5, 11);
       date = new Date(timestamp);
 
       expect(err).toBeNull();
@@ -93,7 +93,7 @@ const convertTests = () => {
       //** ------------------------------- **//
       //** -- Node JS Release Date      -- **//
       //** ------------------------------- **//
-      [timestamp, err] = JDC.convert(1388, 3, 6);
+      [timestamp, err] = JDC.convert(1388, 2, 5);
       date = new Date(timestamp);
 
       expect(err).toBeNull();
@@ -104,7 +104,7 @@ const convertTests = () => {
       //** ------------------------------- **//
       //** -- React JS Release Date     -- **//
       //** ------------------------------- **//
-      [timestamp, err] = JDC.convert(1392, 3, 8);
+      [timestamp, err] = JDC.convert(1392, 2, 7);
       date = new Date(timestamp);
 
       expect(err).toBeNull();

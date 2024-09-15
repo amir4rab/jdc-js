@@ -98,7 +98,7 @@ export const convertDate = (year, month, day) => {
     return [0, new Error(errors.outOfRangeYear)];
 
   // Validating the value of month
-  if (month < 1 || month > 12) return [0, new Error(errors.outOfRangeMonth)];
+  if (month < 0 || month > 11) return [0, new Error(errors.outOfRangeMonth)];
 
   // Checking if the current year is a leap year
   const [leap, leapErr] = isLeap(year);
@@ -109,7 +109,7 @@ export const convertDate = (year, month, day) => {
   const months = leap ? jalaaliMonths.leap : jalaaliMonths.common;
 
   // Validating the value of day
-  if (day < 1 || day > months[month]) {
+  if (day < 0 || day >= months[month]) {
     return [0, new Error(errors.outOfRangeDay)];
   }
 
@@ -123,12 +123,12 @@ export const convertDate = (year, month, day) => {
   let daysSinceNowruz = 0;
 
   // Adding the length of each past month
-  for (let i = 0; i < month - 1; i++) {
+  for (let i = 0; i <= month - 1; i++) {
     daysSinceNowruz += months[i];
   }
 
   // Adding the total number of days in the current month
-  daysSinceNowruz += day - 1;
+  daysSinceNowruz += day;
 
   // Adding the day's value to the Nowruz timestamp
   nowruzTimestamp += msInDay * daysSinceNowruz;
