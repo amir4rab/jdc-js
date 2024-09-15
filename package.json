@@ -1,7 +1,7 @@
 {
   "name": "@amir4rab/jdc",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Set of utilities for converting Jalaali dates into Gregorian Dates.",
   "homepage": "https://github.com/amir4rab/jdc-js",
   "type": "module",
