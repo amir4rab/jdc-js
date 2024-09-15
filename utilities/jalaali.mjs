@@ -118,3 +118,33 @@ export const leapYearsUntil = (year) => {
 
   return leaps;
 };
+
+/**
+ * @param {number} year
+ * @param {number} month
+ * @returns {[number, null | Error]}
+ */
+export const getMonth = (year, month) => {
+  // Checking if the given year is a leap year or common year
+  const [leap, err] = isLeap(year);
+  if (err !== null) {
+    return [0, err];
+  }
+
+  // Validating typeof month
+  if (typeof month !== "number") {
+    return [0, new Error(errors.expectedToBeNumber)];
+  }
+
+  // Validating value of month
+  if (month < 0 || month > 11) {
+    return [0, new Error(errors.outOfRangeMonth)];
+  }
+
+  // Returning value based on the type of the year
+  if (leap) {
+    return [jalaaliMonths.leap[month], null];
+  } else {
+    return [jalaaliMonths.common[month], null];
+  }
+};
