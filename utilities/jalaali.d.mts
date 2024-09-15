@@ -5,7 +5,7 @@ export const cycleBreakers: number[];
 export const jalaaliMonths: { common: number[]; leap: number[] };
 
 /** Checks if the provided Jalaali year is a leap year */
-export declare function isLeap(year: number): [number, null | Error];
+export declare function isLeap(year: number): [boolean, null | Error];
 
 /** Calculates the number of Jalaali leap years until the provided value */
 export declare function leapYearsUntil(year: number): number;

@@ -28,7 +28,7 @@ export const jalaaliMonths = {
 
 /**
  * @param {number} year
- * @returns {[number, null | Error]}
+ * @returns {[boolean, null | Error]}
  */
 export const isLeap = (year) => {
   // Validating the type of user input

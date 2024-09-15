@@ -13,7 +13,7 @@ export const expect = (value) => ({
     }
   },
   toBeError: () => {
-    if (value instanceof TypeError) {
+    if (!(value instanceof Error)) {
       throw new Error(`Expected the value to be an instance of error type`);
     }
   },
