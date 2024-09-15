@@ -20,3 +20,6 @@ main.spec.mjs
 
 # tsconfig
 tsconfig.json
+
+# github
+.github/
