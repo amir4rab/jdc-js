@@ -10,22 +10,13 @@ import { errors } from "./errors.mjs";
 /** -- Vairables  -- **/
 /** ---------------- **/
 
-/**
- * Array of years which breaks the 33-year Jalaali cycles
- * @type {number[]}
- */
+const cycleLength = 33;
+
 export const cycleBreakers = [
   -61, 9, 38, 199, 426, 686, 756, 818, 1111, 1181, 1210, 1635, 2060, 2097, 2192,
   2262, 2324, 2394, 2456, 3178,
 ];
 
-/** Length of the Jalaali calendar cycles */
-const cycleLength = 33;
-
-/**
- * Length of the jalaali months
- * @type {{ common: number[], leap: number[]}}
- */
 export const jalaaliMonths = {
   common: [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29],
   leap: [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 30],
@@ -36,9 +27,8 @@ export const jalaaliMonths = {
 /** ---------------- **/
 
 /**
- * Checks if the provided Jalaali year is a leap year
  * @param {number} year
- * @returns {[int, null | Error]}
+ * @returns {[number, null | Error]}
  */
 export const isLeap = (year) => {
   // Validating the type of user input
@@ -73,7 +63,6 @@ export const isLeap = (year) => {
 };
 
 /**
- * Calculates the number of Jalaali leap years until the provided value
  * @param {number} year
  * @returns {number}
  */

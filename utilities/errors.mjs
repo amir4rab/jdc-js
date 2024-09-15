@@ -1,4 +1,3 @@
-/** Possible error values for the functions */
 export const errors = {
   expectedToBeNumber: "The provided values must be numbers",
   outOfRangeYear: "The provided year is out of the valid range",

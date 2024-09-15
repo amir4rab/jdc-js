@@ -32,9 +32,8 @@ const msInDay = 24 * 60 * 60 * 1000;
 /** ---------------- **/
 
 /**
- * Calculates the difference of leap years of Jalaali Calender and Gregorian Calender until the given year
- * @param {int} year
- * @returns {int}
+ * @param {number} year
+ * @returns {number}
  */
 const diffInLeapYears = (year) => {
   const jalaaliLeapYears = leapYearsUntil(year);
@@ -48,9 +47,8 @@ const diffInLeapYears = (year) => {
 };
 
 /**
- * Calculates the day of Nowruz in UNIX milliseconds
- * @param {int} year
- * @returns {[int, null | Error]}
+ * @param {number} year
+ * @returns {[number, null | Error]}
  */
 export const getNowruz = (year) => {
   // Validating the type of year
@@ -81,11 +79,10 @@ export const getNowruz = (year) => {
 };
 
 /**
- * Converts the given Jalaali date into the UNIX milliseconds equivalent
  * @param {number} year
  * @param {number} month
  * @param {number} day
- * @returns {[int, null | Error]}
+ * @returns {[number, null | Error]}
  */
 export const convertDate = (year, month, day) => {
   // Validating the input types
