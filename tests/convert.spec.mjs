@@ -10,7 +10,7 @@ import { expect, test } from "./test.spec.mjs";
  *  - Performance metrics
  */
 const convertTests = () => {
-  console.log(`Executing "convert" tests...\n`);
+  console.log(`Executing "convert" tests`);
   let passed = 0;
 
   test(
@@ -164,12 +164,12 @@ const convertTests = () => {
       ).toFixed(0);
 
       // Logging the results
-      console.log(`
-Performance Metrics:
-  - Avrage compute per item: ${averageComputeDuration} microseconds
-  - Total compute for ${itemsCount} items: ${totalComputeTime.toFixed(2)}ms
-  - Error count: ${errCount}
-      `);
+      console.log(
+        `\t- Avrage compute per item: ${averageComputeDuration} microseconds\n`,
+        `\t- Total compute for ${itemsCount} items: ${totalComputeTime.toFixed(
+          2
+        )}ms`
+      );
     },
     (successful) => {
       successful && passed++;
@@ -177,9 +177,9 @@ Performance Metrics:
   );
 
   if (passed !== 3) {
-    console.error("[convert tests]: Didn't pass all the tests\n\n");
+    console.error("  Didn't pass all the tests\n\n");
   } else {
-    console.log(`[convert tests]: passed ${passed}/3\n\n`);
+    console.log(`  ✔️ Passed ${passed}/3\n\n`);
   }
 };
 

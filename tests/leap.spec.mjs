@@ -10,7 +10,7 @@ import { expect, test } from "./test.spec.mjs";
  *  - Performance metrics
  */
 const leapTests = () => {
-  console.log(`Executing "leap" tests...\n`);
+  console.log(`Executing "leap" tests`);
   let passed = 0;
 
   test(
@@ -22,6 +22,7 @@ const leapTests = () => {
       //** -- Invalid types       -- **//
       //** ------------------------- **//
       [_, err] = JDC.leap("");
+      expect(err).toBeError();
 
       //** ------------------------- **//
       //** -- Out of range values -- **//
@@ -99,12 +100,12 @@ const leapTests = () => {
       ).toFixed(0);
 
       // Logging the results
-      console.log(`
-Performance Metrics:
-  - Avrage compute per item: ${averageComputeDuration} microseconds
-  - Total compute for ${itemsCount} items: ${totalComputeTime.toFixed(2)}ms
-  - Error count: ${errCount}
-      `);
+      console.log(
+        `\t- Avrage compute per item: ${averageComputeDuration} microseconds\n`,
+        `\t- Total compute for ${itemsCount} items: ${totalComputeTime.toFixed(
+          2
+        )}ms`
+      );
     },
     (successful) => {
       successful && passed++;
@@ -112,9 +113,9 @@ Performance Metrics:
   );
 
   if (passed !== 3) {
-    console.error("[leap tests]: Didn't pass all the tests\n\n");
+    console.error("  Didn't pass all the tests\n\n");
   } else {
-    console.log(`[leap tests]: passed ${passed}/3\n\n`);
+    console.log(`  ✔️ Passed ${passed}/3\n\n`);
   }
 };
 

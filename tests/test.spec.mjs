@@ -36,12 +36,12 @@ export const test = (name, tests, result) => {
   try {
     tests();
   } catch (err) {
-    console.error(`[${name}]:`, err);
+    console.error(`  [${name}]:`, err);
     result && result(false);
     return;
   }
 
   const cd = Math.trunc(performance.now() - st);
-  console.log(`✔️ ${name} (${cd}ms)`);
+  console.log(`  ${name} (${cd}ms)`);
   result && result(true);
 };
